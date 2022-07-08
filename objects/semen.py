@@ -31,7 +31,7 @@ class SemenObject(DrawableObject):
     def check_eaten(self):
         if not self.eaten:
             if self.x == self.pacman.x and self.y == self.pacman.y:
-                self.pacman.increase_points(self.value)
+                self.pacman.increase_eaten_score(self.value)
                 self.eaten = True
                 SemenObject.alive_counter -= 1
                 if not self.game.sound_channel.get_busy():

@@ -7,7 +7,6 @@ from constants import Cell, Color
 
 class PacmanObject(DrawableObject):
     direction = 0  # 1 = up, 2 = right, 3 = down, 4 = left, 0 = nothing
-    points = 0
     lives = 5
     pygame.font.init()
 
@@ -28,7 +27,8 @@ class PacmanObject(DrawableObject):
         self.speed = dict(x=0, y=0)  # скорость по x: -1 - смещение на клетку влево, 1 - вправо
         # скорость по y: -1 - смещение на клетку !вверх, 1 - !вниз
 
-        self.points = 0
+        self.total_score = 0
+        self.eaten_score = 0
         self.rage = False
         self.rage_end = 0
 
@@ -146,14 +146,15 @@ class PacmanObject(DrawableObject):
         else:
             self.just_turned = 0
 
-    def increase_points(self, val=1):
+    def increase_eaten_score(self, val=1):
         if val == 2:
             self.rage = True  # возможно надо сделать где-то таймер, который выключает
-            self.rage_end = pygame.time.get_ticks() + 10 * 1000  # 10 секунд    
-        self.points += val
-        self.game.total_points += val
-        # self.game.total_points = self.points
-        # Тут проигрывается этот звук
+            self.rage_end = pygame.time.get_ticks() + 10 * 1000  # 10 секунд
+        self.eaten_score += 1
+        self.total_score += 1
+
+    def increase_total_score(self, val):
+        self.total_score += val
 
     def die(self):
         if self.lives > 1:
@@ -220,7 +221,7 @@ class PacmanObject(DrawableObject):
         self.draw_pacman()
 
         self.game.screen.blit(
-            pygame.font.Font('fonts/19190.ttf', 70).render(str(self.game.total_points) + ' ', True, (255, 255, 255)),
+            pygame.font.Font('fonts/19190.ttf', 70).render(str(self.total_score) + ' ', True, (255, 255, 255)),
             (10, self.game.HEIGHT - 80))
         self.game.screen.blit(
             pygame.font.Font('fonts/19190.ttf', 70).render('HP ' + str(self.lives) + ' ', True, (0, 255, 0)),

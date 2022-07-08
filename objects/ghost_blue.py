@@ -174,7 +174,7 @@ class BlueGhost(GhostObject):
             else:
                 self.aim_point = AimPoint.BLUE_WAITING
                 self.process_scatter_logic()
-            if self.pacman.points >= 30 and not self.was_30_points_eaten:
+            if self.pacman.eaten_score >= 30 and not self.was_30_points_eaten:
                 self.set_timer()
                 self.was_30_points_eaten = True
                 self.aim_point = AimPoint.BLUE_EXIT

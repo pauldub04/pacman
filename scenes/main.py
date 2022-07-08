@@ -25,8 +25,11 @@ class MainScene(BaseScene):
         self.objects.append(self.field)
         self.objects.append(self.pacman)
 
+        self.total_points = 0
+        for m in self.field.map:
+            self.total_points += m.count(3) + m.count(6) + m.count(5)
+
         pygame.font.init()
-        points_to_show = pygame.font.Font('fonts/19190.ttf', 30).render(str(self.pacman.points), True, (255, 255, 255))
         pygame.event.set_blocked(pygame.MOUSEMOTION)
 
         for i in range(len(self.field.map)):  # semens
@@ -55,12 +58,8 @@ class MainScene(BaseScene):
             item.process_event(event)
 
     def end_game(self):
+        pygame.time.wait(1000)
         self.game.set_scene(Scenes.GAMEOVER)
-
-    def check_game_over(self) -> None:
-        # print('points', PacmanObject.points, 'all ', SemenObject.all_counter)
-        if PacmanObject.points >= SemenObject.all_counter:  # обработка конца игры
-            self.end_game()
 
     def check_collision_classic(self, obj):
         return ((self.pacman.x == obj.position[0] and self.pacman.y == obj.position[1])
@@ -90,13 +89,15 @@ class MainScene(BaseScene):
                 self.end_game()
 
     def check_game_over(self):
-        if self.game.total_points >= 300:  # обработка конца игры
+        if self.pacman.eaten_score >= self.total_points:  # обработка конца игры
             self.end_game()
 
     def check_pacman_on_ghost(self):
         for obj in self.objects:
             if type(obj) in (RedGhost, BlueGhost, OrangeGhost, PinkGhost):
                 if self.check_collision_classic(obj) or self.check_collision_image(obj):
+                    if not obj.is_live:
+                        continue
                     # print(f'pacman and {obj} are on 1 cell')
                     # print(str(self.pacman.points))
                     if self.pacman.rage:
@@ -104,10 +105,10 @@ class MainScene(BaseScene):
                             self.game.sound_channel.play(self.eat_ghost_sound)
 
                         obj.die()
-                        self.game.total_points += 20
+                        self.pacman.increase_total_score(20)
                     else:
                         self.pacman.just_died = True
-                    break
+                        break
 
     def additional_logic(self) -> None:
         self.check_game_over()

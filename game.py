@@ -35,7 +35,6 @@ class Game:
     def __init__(self) -> None:
         self.records = get_records()
         self.high_score = max(self.records[Records.COLUMNS[1]])
-        self.total_points = 0
         self.screen = pygame.display.set_mode(self.SIZE)
         self.scenes = [MenuScene(self), MainScene(self), FinalScene(self), PauseScene(self), TableScene(self)]
         if self.USE_FPS_OVERLAY:
