@@ -108,7 +108,6 @@ class MainScene(BaseScene):
                         self.game.total_points += 20
                     else:
                         self.pacman.just_died = True
-
                     break
 
     def additional_logic(self) -> None:

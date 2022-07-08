@@ -180,6 +180,10 @@ class PacmanObject(DrawableObject):
         )
 
     def set_img(self):
+        if self.just_died:
+            self.image = 'images/pacman/dead.png'
+            return
+
         if PacmanObject.direction == 1:
             folder = 'up'
         elif PacmanObject.direction == 2:
