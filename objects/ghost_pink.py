@@ -199,5 +199,3 @@ class PinkGhost(GhostObject):
     def to_start_position(self):
         self.position = SpawnPoints.PINK
 
-    def process_draw(self) -> None:
-        self.game.screen.blit(pygame.transform.scale(self.image, SpriteConstants.GHOST), self.get_ghost_rect())

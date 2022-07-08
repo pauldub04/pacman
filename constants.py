@@ -60,7 +60,7 @@ class Modes:
 
 class SpriteConstants:
     TRANSPARENT = pygame.color.Color(255, 0, 255)
-    GHOST = (20, 20)
+    GHOST = (35, 35)
 
 
 class Color:

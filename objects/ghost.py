@@ -1,7 +1,7 @@
 import pygame
 
 from objects.base import DrawableObject
-from constants import Cell, Modes, TimerValue
+from constants import Cell, Modes, TimerValue, SpriteConstants
 
 
 class GhostObject(DrawableObject):
@@ -21,6 +21,7 @@ class GhostObject(DrawableObject):
         self.delta_time = None
         self.count_change_timer_mode = None
         self.photo = 1
+        self.image = None
 
     def check_pacman(self):
         if self.pacman.rage:
@@ -64,8 +65,8 @@ class GhostObject(DrawableObject):
     def get_ghost_rect(self):
         return tuple(
             (
-                self.position[0] * Cell.CELL_SIZE + Cell.CELL_SIZE // 2 - 6,
-                self.position[1] * Cell.CELL_SIZE + Cell.CELL_SIZE // 2 - 6,
+                self.position[0] * Cell.CELL_SIZE + Cell.CELL_SIZE // 2 - 13,
+                self.position[1] * Cell.CELL_SIZE + Cell.CELL_SIZE // 2 - 13,
                 Cell.CELL_SIZE,
                 Cell.CELL_SIZE
             )
@@ -114,4 +115,4 @@ class GhostObject(DrawableObject):
             self.delta_time = self.clock.tick(10) / 1000
 
     def process_draw(self) -> None:
-        pass
+        self.game.screen.blit(pygame.transform.scale(self.image, SpriteConstants.GHOST), self.get_ghost_rect())
