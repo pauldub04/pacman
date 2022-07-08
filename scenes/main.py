@@ -27,6 +27,7 @@ class MainScene(BaseScene):
 
         pygame.font.init()
         points_to_show = pygame.font.Font('fonts/19190.ttf', 30).render(str(self.pacman.points), True, (255, 255, 255))
+        pygame.event.set_blocked(pygame.MOUSEMOTION)
 
         for i in range(len(self.field.map)):  # semens
             for j in range(len(self.field.map[i])):

@@ -105,7 +105,13 @@ class PacmanObject(DrawableObject):
 
         # перемещение
         if self.next_speed['x'] != 0 or self.next_speed['y'] != 0:
-            probably_next_cell = self.field.map[self.y + self.next_speed['y']][self.x + self.next_speed['x']]
+            map_sizeY = len(self.field.map)
+            map_sizeX = len(self.field.map[0])
+
+            probably_next_cell_y = (self.y + self.next_speed['y'] + map_sizeY) % map_sizeY
+            probably_next_cell_x = (self.x + self.next_speed['x'] + map_sizeX) % map_sizeX
+            probably_next_cell = self.field.map[probably_next_cell_y][probably_next_cell_x]
+
             if probably_next_cell in (0, 3, 5, 6):  # empty
                 self.speed['y'] = self.next_speed['y']
                 self.speed['x'] = self.next_speed['x']
