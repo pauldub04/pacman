@@ -171,17 +171,13 @@ class PacmanObject(DrawableObject):
         else:
             return 0
 
-    def get_pacman_position(self):
-        # return tuple(
-        #     (self.x * Cell.CELL_SIZE + Cell.CELL_SIZE // 2 + 4, self.y * Cell.CELL_SIZE + Cell.CELL_SIZE // 2 + 4))
-        # вычисляет координату пакмана на экране по номеру клетки, где он стоит
-
-        return tuple((
+    def get_rect(self):
+        return pygame.Rect(
             self.x * Cell.CELL_SIZE - 6,
             self.y * Cell.CELL_SIZE - 6,
-            Cell.CELL_SIZE,
-            Cell.CELL_SIZE,
-        ))
+            self.radius*2,
+            self.radius*2,
+        )
 
     def set_img(self):
         if PacmanObject.direction == 1:
@@ -213,10 +209,10 @@ class PacmanObject(DrawableObject):
     def draw_pacman(self):
         self.set_img()
         image = pygame.image.load(self.image)
-        self.game.screen.blit(image, self.get_pacman_position())
+        # pygame.draw.rect(self.game.screen, Color.GREEN, self.get_rect())
+        self.game.screen.blit(image, self.get_rect())
 
     def process_draw(self) -> None:
-        # pygame.draw.circle(self.game.screen, Color.YELLOW, self.get_pacman_position(), self.radius)
         self.draw_pacman()
 
         self.game.screen.blit(
@@ -227,7 +223,6 @@ class PacmanObject(DrawableObject):
             (150, self.game.HEIGHT - 80))
 
         if self.is_teleport:
-            # pygame.draw.circle(self.game.screen, Color.YELLOW, self.get_pacman_position(), self.radius)
             self.draw_pacman()
 
             self.x = self.tp_exit[1]

@@ -1,7 +1,7 @@
 import pygame
 
 from objects.base import DrawableObject
-from constants import Cell, Modes, TimerValue, SpriteConstants
+from constants import Cell, Modes, TimerValue, SpriteConstants, Color
 
 
 class GhostObject(DrawableObject):
@@ -63,13 +63,11 @@ class GhostObject(DrawableObject):
         self.count_change_timer_mode = 0
 
     def get_ghost_rect(self):
-        return tuple(
-            (
-                self.position[0] * Cell.CELL_SIZE + Cell.CELL_SIZE // 2 - 13,
-                self.position[1] * Cell.CELL_SIZE + Cell.CELL_SIZE // 2 - 13,
-                Cell.CELL_SIZE,
-                Cell.CELL_SIZE
-            )
+        return pygame.Rect(
+            self.position[0] * Cell.CELL_SIZE + Cell.CELL_SIZE // 2 - 13,
+            self.position[1] * Cell.CELL_SIZE + Cell.CELL_SIZE // 2 - 13,
+            SpriteConstants.GHOST[0],
+            SpriteConstants.GHOST[0]
         )
 
     def process_event(self, event: pygame.event.Event) -> None:
@@ -116,3 +114,4 @@ class GhostObject(DrawableObject):
 
     def process_draw(self) -> None:
         self.game.screen.blit(pygame.transform.scale(self.image, SpriteConstants.GHOST), self.get_ghost_rect())
+        # pygame.draw.rect(self.game.screen, Color.BLUE, self.get_ghost_rect())

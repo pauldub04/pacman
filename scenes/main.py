@@ -62,7 +62,7 @@ class MainScene(BaseScene):
         if PacmanObject.points >= SemenObject.all_counter:  # обработка конца игры
             self.end_game()
 
-    def check_collision(self, obj):
+    def check_collision_classic(self, obj):
         return ((self.pacman.x == obj.position[0] and self.pacman.y == obj.position[1])
                 or (self.pacman.x == obj.position[0] and self.pacman.y - 1 == obj.position[1]
                     and PacmanObject.direction == 1 and obj.direction == 3)
@@ -72,6 +72,9 @@ class MainScene(BaseScene):
                     and PacmanObject.direction == 2 and obj.direction == 2)
                 or (self.pacman.y == obj.position[1] and self.pacman.x - 1 == obj.position[0]
                     and PacmanObject.direction == 4 and obj.direction == 4)) and obj.is_ghost_live()
+
+    def check_collision_image(self, obj):
+        return self.pacman.get_rect().colliderect(obj.get_ghost_rect())
 
     def check_death(self):
         if self.pacman.just_died:
@@ -94,7 +97,7 @@ class MainScene(BaseScene):
     def check_pacman_on_ghost(self):
         for obj in self.objects:
             if type(obj) in (RedGhost, BlueGhost, OrangeGhost, PinkGhost):
-                if self.check_collision(obj):
+                if self.check_collision_classic(obj) or self.check_collision_image(obj):
                     # print(f'pacman and {obj} are on 1 cell')
                     # print(str(self.pacman.points))
                     if self.pacman.rage:
