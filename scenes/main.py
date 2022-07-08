@@ -80,15 +80,14 @@ class MainScene(BaseScene):
         if self.pacman.just_died:
             self.game.sound_channel.play(self.death_sound)
 
-            # pygame.time.wait(300)
+            pygame.time.wait(1800)
             for ghost in self.ghosts:
                 ghost.to_start_position()
 
             res = self.pacman.die()
             if res == 0:
+                pygame.time.wait(300)
                 self.end_game()
-            else:
-                pygame.time.wait(800)
 
     def check_game_over(self):
         if self.game.total_points >= 300:  # обработка конца игры
