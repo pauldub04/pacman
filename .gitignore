@@ -311,5 +311,5 @@ scenes/__pycache__/
 ### PROJECT ###
 !.gitkeep
 
-# User data
-players_data/*
+## User data
+#players_data/*

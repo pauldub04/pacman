@@ -68,9 +68,6 @@ class PacmanObject(DrawableObject):
                     self.next_speed['x'] = 1
                     self.next_speed['y'] = 0
 
-            # print('speed', self.speed)
-            # print('direction', PacmanObject.direction)
-
     @staticmethod
     def update_direction(speed):
         if speed['y'] == -1 and speed['x'] == 0:
