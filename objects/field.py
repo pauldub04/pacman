@@ -1,7 +1,7 @@
 import pygame
 
-from objects.base import DrawableObject
 from constants import Cell
+from objects.base import DrawableObject
 
 
 class FieldObject(DrawableObject):

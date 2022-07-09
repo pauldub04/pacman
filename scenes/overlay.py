@@ -13,7 +13,7 @@ class OverlayScene(BaseScene):
         self.text = TextObject(
             game=self.game,
             text='FPS', color=Color.YELLOW,
-            x=self.game.WIDTH-50, y=15
+            x=self.game.WIDTH - 50, y=15
         )
         self.objects.append(self.text)
 
@@ -29,4 +29,4 @@ class OverlayScene(BaseScene):
             self.text.update_text('inf')
 
     def on_window_resize(self) -> None:
-        self.text.move_center(x=self.game.WIDTH-50, y=15)
+        self.text.move_center(x=self.game.WIDTH - 50, y=15)

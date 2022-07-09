@@ -1,8 +1,10 @@
-import pygame
 import math
 import random
+
+import pygame
+
+from constants import Modes, AimPoint, SpawnPoints
 from .ghost import GhostObject
-from constants import Modes, AimPoint, SpawnPoints, SpriteConstants, TimerValue
 
 
 class BlueGhost(GhostObject):
@@ -225,4 +227,3 @@ class BlueGhost(GhostObject):
 
     def to_start_position(self):
         self.position = SpawnPoints.BLUE
-

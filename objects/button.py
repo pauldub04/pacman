@@ -2,9 +2,9 @@ from typing import Callable
 
 import pygame
 
-from third_party.button import Button
 from constants import Color
 from objects.base import DrawableObject
+from third_party.button import Button
 
 
 class ButtonObject(DrawableObject):

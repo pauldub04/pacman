@@ -1,10 +1,11 @@
+from datetime import datetime
+
 import pygame
 
-from objects.semen import SemenObject
-from constants import Color, SpawnPoints, Cell, Scenes, Records
+from constants import SpawnPoints, Scenes, Records
 from objects import FieldObject, PacmanObject, RedGhost, BlueGhost, OrangeGhost, PinkGhost
+from objects.semen import SemenObject
 from scenes import BaseScene
-from datetime import datetime
 
 
 class MainScene(BaseScene):

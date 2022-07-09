@@ -1,8 +1,9 @@
-import pygame
 import random
 
+import pygame
+
+from constants import Cell
 from objects.base import DrawableObject
-from constants import Cell, Color
 
 
 class SemenObject(DrawableObject):
@@ -11,7 +12,6 @@ class SemenObject(DrawableObject):
     pygame.init()
 
     sound_earn_semen = pygame.mixer.Sound('sounds/waka_waka.wav')
-
 
     def __init__(self, game, field, pacman, value=1) -> None:
         super().__init__(game)
@@ -35,8 +35,8 @@ class SemenObject(DrawableObject):
                 self.eaten = True
                 SemenObject.alive_counter -= 1
                 if not self.game.sound_channel.get_busy():
-                    self.game.sound_channel.play(self.sound_earn_semen)            
-                
+                    self.game.sound_channel.play(self.sound_earn_semen)
+
     def move_center(self, x: int, y: int) -> None:
         self.x = x
         self.y = y
@@ -44,6 +44,7 @@ class SemenObject(DrawableObject):
     def get_position(self):
         return tuple((self.x * Cell.CELL_SIZE + Cell.CELL_SIZE // 2 + 4,
                       self.y * Cell.CELL_SIZE + Cell.CELL_SIZE // 2 + 4))
+
     def anim(self):
         if self.radiusAnim < 0:
             self.radius += self.radiusAnim

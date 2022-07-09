@@ -1,9 +1,10 @@
-import pygame
 import math
 import random
-from .ghost import GhostObject
-from constants import Modes, AimPoint, SpawnPoints, TimerValue, SpriteConstants
 
+import pygame
+
+from constants import Modes, AimPoint, SpawnPoints
+from .ghost import GhostObject
 
 
 class PinkGhost(GhostObject):
@@ -35,7 +36,7 @@ class PinkGhost(GhostObject):
                 new_possible_dist = int(
                     math.hypot((self.position[0] + ways[possible_direction[i]][0]) - self.aim_point[0],
                                (self.position[1] + ways[possible_direction[i]][1]) - self.aim_point[1])
-                    )
+                )
                 if new_possible_dist < tmp_dist:
                     tmp_way = possible_direction[i]
                     tmp_dist = new_possible_dist
@@ -48,7 +49,8 @@ class PinkGhost(GhostObject):
             for i in range(4):
                 if (i - 2) % 4 + 1 != self.direction:
                     if ways[i] == (0, 1):
-                        if 12 <= self.position[0] <= 15 and self.position[1] + ways[i][1] == 12 and self.is_ghost_live():
+                        if 12 <= self.position[0] <= 15 and self.position[1] + ways[i][
+                            1] == 12 and self.is_ghost_live():
                             continue
                         else:
                             if self.field.is_available_point(self.position[0] + ways[i][0],
@@ -198,4 +200,3 @@ class PinkGhost(GhostObject):
 
     def to_start_position(self):
         self.position = SpawnPoints.PINK
-

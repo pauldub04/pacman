@@ -1,7 +1,8 @@
+from pandas import DataFrame
+
 from constants import Color, Scenes, Records
 from objects import ButtonObject, TextObject
 from scenes import BaseScene
-from pandas import read_csv, DataFrame, Index
 
 
 class TableScene(BaseScene):

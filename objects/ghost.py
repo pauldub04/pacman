@@ -1,7 +1,7 @@
 import pygame
 
+from constants import Cell, Modes, TimerValue, SpriteConstants
 from objects.base import DrawableObject
-from constants import Cell, Modes, TimerValue, SpriteConstants, Color
 
 
 class GhostObject(DrawableObject):

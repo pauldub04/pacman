@@ -1,9 +1,10 @@
 from datetime import datetime
+from random import choice
 
 from constants import Color, Scenes
 from objects import TextObject
 from scenes import BaseScene
-from random import choice
+
 
 class FinalScene(BaseScene):
     TEXT_FMT = 'Игра Окончена ({})'
@@ -31,7 +32,7 @@ class FinalScene(BaseScene):
             self.TEXT_DEATH = choice(['Вас убили', 'Вас съели', 'Вы проиграли'])
 
         self.text_death_or_win = TextObject(self.game, text=self.TEXT_DEATH, color=Color.RED,
-                 x=self.game.WIDTH // 2, y=self.game.HEIGHT // 2)
+                                            x=self.game.WIDTH // 2, y=self.game.HEIGHT // 2)
 
         self.objects.append(self.text_death_or_win)
 

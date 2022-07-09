@@ -1,9 +1,11 @@
-import pygame
 import os.path
+
+import pygame
+from pandas import read_csv
+
 from constants import Color, Cell, Scenes, Records
 from scenes import MainScene, MenuScene, FinalScene, PauseScene, TableScene
 from scenes.overlay import OverlayScene
-from pandas import read_csv, DataFrame, Index
 
 
 def get_records() -> str:

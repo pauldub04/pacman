@@ -1,8 +1,7 @@
 import pygame
-import pandas as pd
 
+from constants import Cell
 from objects.base import DrawableObject
-from constants import Cell, Color
 
 
 class PacmanObject(DrawableObject):
@@ -173,8 +172,8 @@ class PacmanObject(DrawableObject):
         return pygame.Rect(
             self.x * Cell.CELL_SIZE - 6,
             self.y * Cell.CELL_SIZE - 6,
-            self.radius*2,
-            self.radius*2,
+            self.radius * 2,
+            self.radius * 2,
         )
 
     def set_img(self):

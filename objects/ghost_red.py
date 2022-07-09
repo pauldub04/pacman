@@ -1,8 +1,10 @@
-import pygame
 import math
 import random
+
+import pygame
+
+from constants import Modes, AimPoint, SpawnPoints
 from .ghost import GhostObject
-from constants import Modes, AimPoint, SpawnPoints, SpriteConstants
 
 
 class RedGhost(GhostObject):
@@ -183,4 +185,3 @@ class RedGhost(GhostObject):
 
     def to_start_position(self):
         self.position = SpawnPoints.RED
-

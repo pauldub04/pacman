@@ -1,8 +1,10 @@
-import pygame
 import math
 import random
+
+import pygame
+
+from constants import Modes, AimPoint, SpawnPoints
 from .ghost import GhostObject
-from constants import Modes, AimPoint, SpawnPoints, TimerValue, SpriteConstants
 
 
 class OrangeGhost(GhostObject):
@@ -198,4 +200,3 @@ class OrangeGhost(GhostObject):
 
     def to_start_position(self):
         self.position = SpawnPoints.ORANGE
-
