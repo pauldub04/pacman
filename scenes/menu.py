@@ -23,9 +23,13 @@ class MenuScene(BaseScene):
         self.objects = [self.button_start, self.button_records, self.button_exit]
 
     def start_game(self) -> None:
+        for scene in self.game.scenes:
+            scene.create_objects()
         self.game.set_scene(Scenes.MAIN)
 
     def show_table(self) -> None:
+        self.game.update_records()
+        self.game.scenes[Scenes.TABLE].create_objects()
         self.game.set_scene(Scenes.TABLE)
 
     def on_window_resize(self) -> None:

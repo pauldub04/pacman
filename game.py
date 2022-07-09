@@ -33,13 +33,18 @@ class Game:
         pass
 
     def __init__(self) -> None:
-        self.records = get_records()
-        self.high_score = max(self.records[Records.COLUMNS[1]])
+        self.records = ''
+        self.high_score = 0
+        self.update_records()
         self.screen = pygame.display.set_mode(self.SIZE)
         self.scenes = [MenuScene(self), MainScene(self), FinalScene(self), PauseScene(self), TableScene(self)]
         if self.USE_FPS_OVERLAY:
             self.overlay = OverlayScene(self)
         self.game_over = False
+
+    def update_records(self):
+        self.records = get_records()
+        self.high_score = max(self.records[Records.COLUMNS[1]])
 
     @staticmethod
     def exit_button_pressed(event: pygame.event.Event) -> bool:
@@ -100,7 +105,7 @@ class Game:
         self.screen.fill(Color.BLACK)
         self.scenes[self.current_scene_index].process_draw()
         self.screen.blit(pygame.font.Font('fonts/19190.ttf', 70).render(f'H.S. {self.high_score}', True, (255, 0, 0)),
-                         (self.WIDTH // 2 + 50, self.HEIGHT - 80))
+                         (self.WIDTH // 2 + 40, self.HEIGHT - 80))
         if self.USE_FPS_OVERLAY:
             self.overlay.process_draw()
 

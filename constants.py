@@ -15,7 +15,7 @@ class Scenes:
 
 class Records:
     FILE = 'players_data/table_records.csv'
-    COLUMNS = ['name', 'points']
+    COLUMNS = ['date', 'points']
     EXAMPLE = 'John, 0\n'
     MAX = 20
 

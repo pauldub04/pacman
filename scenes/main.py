@@ -1,9 +1,10 @@
 import pygame
 
 from objects.semen import SemenObject
-from constants import Color, SpawnPoints, Cell, Scenes
+from constants import Color, SpawnPoints, Cell, Scenes, Records
 from objects import FieldObject, PacmanObject, RedGhost, BlueGhost, OrangeGhost, PinkGhost
 from scenes import BaseScene
+from datetime import datetime
 
 
 class MainScene(BaseScene):
@@ -16,12 +17,16 @@ class MainScene(BaseScene):
     def create_objects(self) -> None:
         self.field = FieldObject(self.game)
         self.pacman = PacmanObject(self.game, self.field)
+        self.pacman.direction = 0
+        self.pacman.lives = 5
         self.ghosts = [
             RedGhost(self.game, self.field, SpawnPoints.RED, self.pacman),
             OrangeGhost(self.game, self.field, SpawnPoints.ORANGE, self.pacman),
             PinkGhost(self.game, self.field, SpawnPoints.PINK, self.pacman)
         ]
         self.ghosts.append(BlueGhost(self.game, self.field, SpawnPoints.BLUE, self.pacman, self.ghosts[0]))
+
+        self.objects.clear()
         self.objects.append(self.field)
         self.objects.append(self.pacman)
 
@@ -58,7 +63,12 @@ class MainScene(BaseScene):
             item.process_event(event)
 
     def end_game(self):
-        pygame.time.wait(1000)
+        pygame.time.wait(500)
+        now = datetime.now()
+        current_time = now.strftime("%b %d - %H:%M")
+        with open(Records.FILE, 'a') as file:
+            file.write(f'{current_time}, {self.pacman.total_score}\n')
+        self.game.update_records()
         self.game.set_scene(Scenes.GAMEOVER)
 
     def check_collision_classic(self, obj):
@@ -86,6 +96,7 @@ class MainScene(BaseScene):
             res = self.pacman.die()
             if res == 0:
                 pygame.time.wait(300)
+                self.game.death_game_over = True
                 self.end_game()
 
     def check_game_over(self):

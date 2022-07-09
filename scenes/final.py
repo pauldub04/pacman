@@ -7,15 +7,16 @@ from random import choice
 
 class FinalScene(BaseScene):
     TEXT_FMT = 'Игра Окончена ({})'
-    seconds_to_end = 15
-    TEXT_DEATH = 'Молодец'
+    seconds_to_end = 6
+    TEXT_DEATH = 'Вы выиграли'
+
     def __init__(self, game) -> None:
         self.last_seconds_passed = 0
         super().__init__(game)
         self.update_start_time()
 
-
     def on_activate(self) -> None:
+        self.create_objects()
         self.update_start_time()
 
     def update_start_time(self) -> None:
@@ -25,14 +26,15 @@ class FinalScene(BaseScene):
         return self.TEXT_FMT.format(self.seconds_to_end - self.last_seconds_passed)
 
     def create_objects(self) -> None:
-        if self.game.death_game_over == True:
-
-            self.TEXT_DEATH = choice(['Вас убили', 'Вас съели', 'Вы проиграли'])  
+        self.objects.clear()
+        if self.game.death_game_over:
+            self.TEXT_DEATH = choice(['Вас убили', 'Вас съели', 'Вы проиграли'])
 
         self.text_death_or_win = TextObject(self.game, text=self.TEXT_DEATH, color=Color.RED,
                  x=self.game.WIDTH // 2, y=self.game.HEIGHT // 2)
 
         self.objects.append(self.text_death_or_win)
+
     def additional_logic(self) -> None:
         time_current = datetime.now()
         seconds_passed = (time_current - self.time_start).seconds
